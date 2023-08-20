@@ -15,11 +15,43 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
         });
+
+        Schema::create('likes', function (Blueprint $table) {
+            $table->integer('user_id');
+            $table->integer('recipe_id');
+            $table->rememberToken();
+            $table->timestamps();
+        });
+
+        Schema::create('comments', function (Blueprint $table) {
+            $table->integer('user_id');
+            $table->integer('recipe_id');
+            $table->string('content');
+            $table->rememberToken();
+            $table->timestamps();
+        });
+
+        Schema::create('lists', function (Blueprint $table) {
+            $table->id();
+            $table->integer('user_id');
+            $table->integer('recipe_id');
+            $table->rememberToken();
+            $table->timestamps();
+        });
+        
+        Schema::create('plans', function (Blueprint $table) {
+            $table->id();
+            $table->integer('user_id');
+            $table->integer('recipe_id');
+            $table->dateTime('meal_date');
+            $table->rememberToken();
+            $table->timestamps();
+        });
+
     }
 
     /**
@@ -28,5 +60,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('users');
+        Schema::dropIfExists('likes');
+        Schema::dropIfExists('comments');
+        Schema::dropIfExists('lists');
+        Schema::dropIfExists('plans');
     }
 };
