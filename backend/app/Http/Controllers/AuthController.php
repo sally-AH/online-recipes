@@ -5,8 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
-class AuthController extends Controller
-{
+class AuthController extends Controller {
 
     public function __construct() {
         $this->middleware('auth:api', ['except' => ['login','register']]);
@@ -22,19 +21,16 @@ class AuthController extends Controller
         $token = Auth::attempt($credentials);
         if (!$token) {
             return response()->json([
-                'status' => 'error',
+                'status' => 'Error',
                 'message' => 'Unauthorized',
             ], 401);
         }
 
         $user = Auth::user();
+        $user->token = $token;
         return response()->json([
                 'status' => 'success',
-                'user' => $user,
-                'authorisation' => [
-                    'token' => $token,
-                    'type' => 'bearer',
-                ]
+                'data' => $user,
             ]);
 
     }
@@ -45,22 +41,18 @@ class AuthController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
         ]);
-
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        $user = new User;
+        $user->name=$request->name;
+        $user->email=$request->email;
+        $user->password=Hash::make($request->password);
+        $user->save();
 
         $token = Auth::login($user);
+        $user->token = $token;
         return response()->json([
             'status' => 'success',
             'message' => 'User created successfully',
-            'user' => $user,
-            'authorisation' => [
-                'token' => $token,
-                'type' => 'bearer',
-            ]
+            'data' => $user,
         ]);
     }
 
@@ -73,13 +65,11 @@ class AuthController extends Controller
     }
 
     public function refresh() {
+        $user = Auth::user();
+        $user->token = Auth::refresh();
         return response()->json([
             'status' => 'success',
-            'user' => Auth::user(),
-            'authorisation' => [
-                'token' => Auth::refresh(),
-                'type' => 'bearer',
-            ]
+            'data' => Auth::user(),
         ]);
     }
 
