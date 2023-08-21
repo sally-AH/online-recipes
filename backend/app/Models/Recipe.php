@@ -17,24 +17,27 @@ class Recipe extends Model
         return $this->belongsTo(Cuisine::class);
     }
 
-    public function recipeDetails() {
-        return $this->hasMany(RecipeDetail::class);
+    public function likes() {
+        return $this->hasMany(Like::class);
     }
 
-        public function likes() {
-        return $this->hasMany(Like::class);
+    public function recipeDetails() {
+        return $this->hasMany(RecipeDetail::class);
     }
 
     public function comments() {
         return $this->hasMany(Comment::class);
     }
 
-    public function lists()
-    {
+    public function lists() {
         return $this->hasMany(RecipeList::class);
     }
 
     public function plans() {
         return $this->hasMany(Plan::class);
+    }
+
+    public function recipeLists() {
+        return $this->hasMany(RecipeList::class);
     }
 }

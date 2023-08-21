@@ -9,11 +9,12 @@ class RecipeList extends Model
 {
     use HasFactory;
 
-    public function user() {
-        return $this->belongsTo(User::class);
+    public function userList() {
+        return $this->belongsTo(UserList::class);
     }
 
     public function recipe() {
         return $this->belongsTo(Recipe::class);
     }
+
 }

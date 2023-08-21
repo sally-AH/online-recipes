@@ -13,8 +13,7 @@ class RecipeDetails extends Model
         return $this->belongsTo(Recipe::class);
     }
 
-    public function ingredient()
-    {
+    public function ingredient() {
         return $this->belongsTo(Ingredient::class);
     }
 }

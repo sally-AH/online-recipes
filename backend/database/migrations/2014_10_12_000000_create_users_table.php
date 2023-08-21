@@ -21,6 +21,7 @@ return new class extends Migration
         });
 
         Schema::create('likes', function (Blueprint $table) {
+            $table->id();
             $table->integer('user_id');
             $table->integer('recipe_id');
             $table->rememberToken();
@@ -28,6 +29,7 @@ return new class extends Migration
         });
 
         Schema::create('comments', function (Blueprint $table) {
+            $table->id();
             $table->integer('user_id');
             $table->integer('recipe_id');
             $table->string('content');
@@ -35,9 +37,15 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('lists', function (Blueprint $table) {
+        Schema::create('user_lists', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
+            $table->rememberToken();
+            $table->timestamps();
+        });
+
+        Schema::create('recipe_lists', function (Blueprint $table) {
+            $table->integer('list_id');
             $table->integer('recipe_id');
             $table->rememberToken();
             $table->timestamps();
