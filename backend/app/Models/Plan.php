@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Plan extends Model
 {
     use HasFactory;
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+    
+    public function recipe() {
+        return $this->belongsTo(Recipe::class);
+    }
 }

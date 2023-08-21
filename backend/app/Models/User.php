@@ -13,6 +13,26 @@ class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public function likes() {
+        return $this->hasMany(Like::class);
+    }
+
+    public function comments() {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function lists() {
+        return $this->hasMany(RecipeList::class);
+    }
+
+    public function plans() {
+        return $this->hasMany(Plan::class);
+    }
+
+    public function recipes() {
+        return $this->hasMany(Recipe::class);
+    }
+
     protected $fillable = [
         'name',
         'email',
