@@ -1,0 +1,17 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 1rem;
+    background-color: #030e12;
+    padding: 5px;
+}
+
+img {
+    width: 100%;
+    border-radius: 1rem 1rem 0 0;
+}
+.card h3 {
+    color: white;
+    font-size: 18px;
+
+}

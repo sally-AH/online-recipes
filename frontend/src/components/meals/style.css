@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Bona+Nova&display=swap');
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Bona Novea', serif;
+}
+
+body {
+    background-color: #fcde67;
+}
+.main {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+.heading {
+    color: #030e12;
+    font-size: 48px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    padding-top: 8rem;
+    margin: 1rem;
+}
+.heading h4 {
+    color: rgb(110, 110, 110);
+}
+.search-bar{
+    margin: 1rem 0;
+    width: 400px;
+    height: 40px;
+    border: none;
+    outline: none;
+    border-radius: 1rem;
+    padding: 0.3rem 1rem;
+}
+.search-bar::placeholder{
+    color: rgb(168, 168, 157);
+}
+.container {
+    width: 80%;
+    margin: 25px auto;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+
+}
