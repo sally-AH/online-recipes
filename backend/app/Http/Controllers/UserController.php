@@ -9,7 +9,7 @@ class UserController extends Controller
 {
     public function getUserRecipes() {
         $user = Auth::user();
-        $recipes = $user->recipes;
+        $recipes = $user->recipes()->with('cuisine')->get();
 
         return response()->json([
             'status' => 'success',
