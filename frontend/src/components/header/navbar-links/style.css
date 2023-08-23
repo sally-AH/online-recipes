@@ -1,0 +1,10 @@
+li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+  
+.navbar-links li a:hover {
+    color: lightgray;
+}

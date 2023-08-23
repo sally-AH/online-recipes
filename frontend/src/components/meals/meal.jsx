@@ -12,7 +12,7 @@ const Meal = ()=>{
         try {
           const response = await sendRequest({
             route: "/user/getallrecipes",
-            method: requestMethods.GET,
+            method: requestMethods.POST,
           });
           console.log(response.data);
           setRecipes(response.data);
@@ -35,7 +35,6 @@ const Meal = ()=>{
             </div>
             <div className="container">
             {recipes.map((recipe) => {
-              console.log(recipe)
               return  <MealItem key={recipe.id} data={recipe}/>
             })}
                 

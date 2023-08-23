@@ -18,7 +18,7 @@ body {
     font-size: 48px;
     font-weight: 900;
     letter-spacing: 1px;
-    padding-top: 8rem;
+    padding-top: 3rem;
     margin: 1rem;
 }
 .heading h4 {
@@ -42,5 +42,7 @@ body {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 
 }
