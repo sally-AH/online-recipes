@@ -27,8 +27,13 @@ class RecipeController extends Controller {
         ], 200);
     }
 
-    public function getAllRecipes(){
-        $recipes = Recipe::all();
+    public function getAllRecipes(Request $request){
+        $id = $request->id;
+        if($id){
+            $recipes = Recipe::with('cuisine', 'recipeDetails.ingredient')->find($id);
+        }else{
+            $recipes = Recipe::with('cuisine', 'recipeDetails.ingredient')->get();
+        }
         return response()->json([
             'status' => 'success',
             'data' => $recipes,

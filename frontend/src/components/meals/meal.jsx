@@ -1,23 +1,21 @@
 import './style.css'
 import MealItem from '../MealItem/meal_item'
 import React, { useState,useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
 import sendRequest from '../Core/config/request'
 import requestMethods from '../Core/enums/requestMethods'
 
 
 const Meal = ()=>{
-    // const navigation = useNavigate();
-    const [classes, setClasses ] = useState([]);
+    const [recipes, setRecipes ] = useState([]);
     useEffect(() => {
       const fetchData = async () => {
         try {
           const response = await sendRequest({
-            route: "/Student/get_all_enrolled_courses",
+            route: "/user/getallrecipes",
             method: requestMethods.GET,
           });
           console.log(response.data);
-          setClasses(response.data);
+          setRecipes(response.data);
         } catch (error) {
           if (error.response.status === 401) {
           }
@@ -36,14 +34,11 @@ const Meal = ()=>{
                 <input type="search" className="search-bar" placeholder='type to search'/>
             </div>
             <div className="container">
-                <MealItem/>
-                <MealItem/>
-                <MealItem/>
-                <MealItem/>
-                <MealItem/>
-                <MealItem/>
-                <MealItem/>
-                <MealItem/>
+            {recipes.map((recipe) => {
+              console.log(recipe)
+              return  <MealItem key={recipe.id} data={recipe}/>
+            })}
+                
             </div>
         </div>
         </>

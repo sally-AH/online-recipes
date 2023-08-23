@@ -14,7 +14,7 @@ class Recipe extends Model
     }
 
     public function cuisine() {
-        return $this->belongsTo(Cuisine::class);
+        return $this->belongsTo(Cuisine::class, 'cuisine_id');
     }
 
     public function likes() {
@@ -22,7 +22,7 @@ class Recipe extends Model
     }
 
     public function recipeDetails() {
-        return $this->hasMany(RecipeDetail::class);
+        return $this->hasMany(RecipeDetails::class, 'recipe_id');
     }
 
     public function comments() {

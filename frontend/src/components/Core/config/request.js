@@ -14,7 +14,7 @@ export const sendRequest = async ({
   axios.defaults.headers.authorization = includeHeaders
     ? `Bearer ${localStorageAction("token")}`
     : "";
-    console.log(axios.defaults.headers)
+    // console.log(axios.defaults.headers)
   try {
     const response = await axios.request({
       method,

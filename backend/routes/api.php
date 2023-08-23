@@ -23,7 +23,7 @@ Route::group(["middleware"=>"auth:api"], function(){
 
     Route::group(["prefix"=>"user"], function(){
         Route::post('addrecipe', [RecipeController::class, 'addRecipe']);
-        Route::get('getallrecipes', [RecipeController::class, 'getAllRecipes']);
+        Route::post('getallrecipes', [RecipeController::class, 'getAllRecipes']);
         Route::post('adduserlist', [UserListController::class, 'addUserList']);
         Route::get('getuserlists', [UserListController::class, 'getUserLists']);
         Route::get('getuserlistdetails', [RecipeListController::class, 'getUserListDetails']);

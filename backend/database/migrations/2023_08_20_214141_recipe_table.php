@@ -29,7 +29,6 @@ return new class extends Migration
         });
 
         Schema::create('recipe_details', function (Blueprint $table) {
-            $table->id();
             $table->integer("recipe_id");
             $table->integer("ingredient_id");
             $table->integer("ingredient_quantity");
