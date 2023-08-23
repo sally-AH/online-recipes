@@ -3,53 +3,113 @@
 namespace App\Http\Controllers;
 
 use App\Models\RecipeList;
+use App\Models\Recipe;
 use App\Models\UserList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class RecipeListController extends Controller
-{
-    public function addUserList() {
+class RecipeListController extends Controller {
+    
+    // public function getUserListDetails() {
 
-        $recipe = new UserList();
-        $recipe->save();
+    //     $user = Auth::user();
+    //     $lists = $user->userLists;
+    //     foreach ($lists as $list) {
+    //         $recipeLists = RecipeList::where('list_id', $list->id)->get();
+    //     }
 
+
+
+    //     return response()->json([
+    //         'status' => 'success',
+    //         'data' => $recipeLists,
+    //     ], 200);
+    // }
+
+    // public function getUserListDetails() {
+    //     $user = Auth::user();
+    //     $lists = $user->userLists;
+    
+    //     $allRecipeLists = []; // Initialize an array to store all recipe lists
+    
+    //     foreach ($lists as $list) {
+    //         $recipeLists = RecipeList::where('list_id', $list->id)->get();
+    //         $allRecipeLists[$list->id] = $recipeLists; // Store recipe lists in the array
+    //     }
+    
+    //     return response()->json([
+    //         'status' => 'success',
+    //         'data' => $allRecipeLists, // Return all recipe lists
+    //     ], 200);
+    // }
+
+    // public function getUserListDetails() {
+    //     $user = Auth::user();
+    //     $lists = $user->userLists;
+    
+    //     $allUserLists = []; // Initialize an array to store all user lists with their recipe lists
+    
+    //     foreach ($lists as $list) {
+    //         $recipeLists = RecipeList::where('list_id', $list->id)->get();
+    
+    //         $allUserLists[] = [
+    //             'user_list' => $list,
+    //             'recipe_lists' => $recipeLists,
+    //         ];
+    //     }
+    
+    //     return response()->json([
+    //         'status' => 'success',
+    //         'data' => $allUserLists,
+    //     ], 200);
+    // }
+
+    // public function getUserListDetails() {
+    //     $user = Auth::user();
+    //     $lists = $user->userLists;
+    
+    //     $allUserLists = []; // Initialize an array to store all user lists with embedded recipes
+    
+    //     foreach ($lists as $list) {
+    //         $recipeLists = RecipeList::where('list_id', $list->id)->get();
+    //         $recipesArray = $recipeLists->pluck('recipe_id')->toArray(); // Get an array of recipe IDs
+    
+    //         $list->recipes = $recipesArray; // Embed recipes array within the list
+    
+    //         $allUserLists[] = $list; // Add the list to the allUserLists array
+    //     }
+    
+    //     return response()->json([
+    //         'status' => 'success',
+    //         'data' => $allUserLists,
+    //     ], 200);
+    // }
+
+    public function getUserListDetails() {
+        $user = Auth::user();
+        $lists = $user->userLists;
+    
+        $allUserLists = []; // Initialize an array to store all user lists with embedded recipes
+    
+        foreach ($lists as $list) {
+            $recipeLists = RecipeList::where('list_id', $list->id)->get();
+            $recipesArray = $recipeLists->pluck('recipe_id')->toArray(); // Get an array of recipe IDs
+    
+            $recipes = Recipe::whereIn('id', $recipesArray)->get(); // Retrieve recipe details
+    
+            $list->recipes = $recipes; // Embed recipe details within the list
+    
+            $allUserLists[] = $list; // Add the list to the allUserLists array
+        }
+    
         return response()->json([
             'status' => 'success',
-            'data' => $recipe,
+            'data' => $allUserLists,
         ], 200);
     }
-
-
-    public function addRecipeList(Request $request, $user_list_id) {
-        // Find the user list
-        $userList = UserList::findOrFail($user_list_id);
-
-        // Validate the incoming request data
-        $validatedData = $request->validate([
-            'recipe_id' => 'required|integer',
-            // You can add more validation rules here
-        ]);
-
-        // Create a new recipe list entry
-        $recipeList = new RecipeList([
-            'recipe_id' => $validatedData['recipe_id'],
-            'user_id' => $userList->user_id,
-        ]);
-        $userList->recipeLists()->save($recipeList);
-
-        return response()->json([
-            'message' => 'Recipe added to list successfully',
-            'data' => $recipeList,
-        ], 201); // 201 Created status code
-    }
-
-    public function getAllUserLists() {
-        $user = Auth::user();
-        $lists = RecipeList::where('user_id', $user->id)->with('recipe')->get();
-        return response()->json([
-            'status' => 'success',
-            'data' => $lists,
-        ]);
-    }
+    
+    
+    
+    
+    
 }

@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\RecipeListController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserListController;
 
 // Unauthenticated APIs
 Route::group(["prefix"=>"guest"], function(){
@@ -21,9 +23,11 @@ Route::group(["middleware"=>"auth:api"], function(){
 
     Route::group(["prefix"=>"user"], function(){
         Route::post('addrecipe', [RecipeController::class, 'addRecipe']);
-        Route::post('adduserlist', [RecipeListController::class, 'addUserList']);
-        Route::get('addreciprlist', [RecipeListController::class, 'addRecipeList']);
-        Route::get('getAllUserLists', [RecipeListController::class, 'getAllUserLists']);
+        Route::post('adduserlist', [UserListController::class, 'addUserList']);
+        Route::get('getuserlists', [UserListController::class, 'getUserLists']);
+        Route::get('getuserlistdetails', [RecipeListController::class, 'getUserListDetails']);
+        Route::get('getuserrecipes', [UserController::class, 'getUserRecipes']);
+        
         Route::post('logout',[AuthController::class, 'logout']);
         Route::post('refresh',[AuthController::class, 'refresh']);
     });

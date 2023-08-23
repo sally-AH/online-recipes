@@ -13,6 +13,6 @@ class UserList extends Model
         return $this->belongsTo(User::class);
     }
     public function recipeLists() {
-        return $this->hasMany(RecipeList::class);
+        return $this->hasMany(RecipeList::class, 'user_list_id');
     }
 }
