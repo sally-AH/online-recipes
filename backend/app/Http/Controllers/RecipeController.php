@@ -26,4 +26,12 @@ class RecipeController extends Controller {
             'data' => $recipe,
         ], 200);
     }
+
+    public function getAllRecipes(){
+        $recipes = Recipe::all();
+        return response()->json([
+            'status' => 'success',
+            'data' => $recipes,
+        ], 200);
+    }
 }
