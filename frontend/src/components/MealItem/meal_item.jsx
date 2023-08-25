@@ -2,7 +2,6 @@ import './style.css'
 import React from 'react';
 import { useNavigate} from 'react-router-dom';
 
-
 const MealItem = ({data})=>{
     const navigate = useNavigate();
     {

@@ -4,7 +4,6 @@ import React, { useState,useEffect } from 'react'
 import sendRequest from '../Core/config/request'
 import requestMethods from '../Core/enums/requestMethods'
 
-
 const MyRecipes = ()=>{
     const [recipes, setRecipes ] = useState([]);
     useEffect(() => {
@@ -28,7 +27,7 @@ const MyRecipes = ()=>{
         <div className="main">
             <div className="heading">
                 <h1>My Recipe</h1>
-                <h4>some text  some text</h4>
+                <h4>Your Favourit Meals in One Place</h4>
             </div>
             <div className="searchBox">
                 <input type="search" className="search-bar" placeholder='type to search'/>

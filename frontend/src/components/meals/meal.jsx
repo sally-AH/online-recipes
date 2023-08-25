@@ -1,9 +1,8 @@
-import './style.css'
 import MealItem from '../MealItem/meal_item'
 import React, { useState,useEffect } from 'react'
 import sendRequest from '../Core/config/request'
 import requestMethods from '../Core/enums/requestMethods'
-
+import './style.css'
 
 const Meal = ()=>{
     const [recipes, setRecipes ] = useState([]);
@@ -28,7 +27,7 @@ const Meal = ()=>{
         <div className="main">
             <div className="heading">
                 <h1>Search for Recipe</h1>
-                <h4>some text  some text</h4>
+                <h4>Your Favourit Meals in One Place</h4>
             </div>
             <div className="searchBox">
                 <input type="search" className="search-bar" placeholder='type to search'/>
